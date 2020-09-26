@@ -9,5 +9,10 @@ Description: This package calculates life expectancies based on results of a pro
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Imports: sqldf,stringr, expint, survival,MASS
+Imports:
+	sqldf, 
+	stringr, 
+	expint, 
+	survival,
+	MASS
 RoxygenNote: 6.1.1
