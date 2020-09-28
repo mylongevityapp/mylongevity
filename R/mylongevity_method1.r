@@ -1,4 +1,5 @@
-#' my longevity method1 function
+#' my longevity method1
+#'
 #' This function loads a file as a data frame of clients.
 #' Using the argument 'indexes_of_variables', this function selects the columns of factors
 #' and matches them to outcomes of life expectancy calculator https://mylongevity.org/about
