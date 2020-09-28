@@ -2,10 +2,7 @@
 % Please edit documentation in R/mylongevity_method1.r
 \name{mylongevity_method1}
 \alias{mylongevity_method1}
-\title{my longevity method1 function
-This function loads a file as a data frame of clients.
-Using the argument 'indexes_of_variables', this function selects the columns of factors
-and matches them to outcomes of life expectancy calculator https://mylongevity.org/about}
+\title{my longevity method1}
 \usage{
 mylongevity_method1(data, indexes_of_variables)
 }
@@ -19,7 +16,6 @@ data frame with life expectancies for given data frame of clients
 mylongevity_method1()
 }
 \description{
-my longevity method1 function
 This function loads a file as a data frame of clients.
 Using the argument 'indexes_of_variables', this function selects the columns of factors
 and matches them to outcomes of life expectancy calculator https://mylongevity.org/about

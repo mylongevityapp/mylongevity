@@ -2,11 +2,7 @@
 % Please edit documentation in R/mylongevity_method2.r
 \name{mylongevity_method2}
 \alias{mylongevity_method2}
-\title{my longevity method2 function
-This function loads a file as a data frame of clients.
-Using the argument 'indexes_of_variables', this function selects the columns of factors
-Then using the argument 'list_of_variables' this functions selects the columns of interest to be matched
-with coefficients (i.e log-hazard ratios) estimated in analysis}
+\title{my longevity method2}
 \usage{
 mylongevity_method2(data, indexes_of_variables, list_of_variables, age, a,
   b, working_directory)
@@ -31,7 +27,6 @@ data frame with life expectancies for given data frame of clients
 mylongevity_method2()
 }
 \description{
-my longevity method2 function
 This function loads a file as a data frame of clients.
 Using the argument 'indexes_of_variables', this function selects the columns of factors
 Then using the argument 'list_of_variables' this functions selects the columns of interest to be matched
