@@ -150,7 +150,7 @@ function(age,a,b,vector_of_coefficients,LogHazardRations,data_for_weights,workin
 	table_of_unique_coefficients=NULL
 	for(coefficient in 1:length(unique_coefficients)){
 		current_coefficient=unique_coefficients[coefficient]
-		current_variable=vector_of_coefficients[str_detect(vector_of_coefficients, current_coefficient)]
+		current_variable=vector_of_coefficients[stringr::str_detect(vector_of_coefficients, current_coefficient)]
 		matches <- regmatches(current_variable, gregexpr("[[:digit:]]+", current_variable))
 		categories<-as.numeric(unlist(matches))
 		baseline_category_index<-min(categories)-1
