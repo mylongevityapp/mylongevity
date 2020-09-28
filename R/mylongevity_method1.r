@@ -1,4 +1,4 @@
-#' my longevity method1
+#' mylongevity_method1
 #'
 #' This function loads a file as a data frame of clients.
 #' Using the argument 'indexes_of_variables', this function selects the columns of factors

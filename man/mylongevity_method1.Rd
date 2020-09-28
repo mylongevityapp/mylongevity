@@ -2,7 +2,7 @@
 % Please edit documentation in R/mylongevity_method1.r
 \name{mylongevity_method1}
 \alias{mylongevity_method1}
-\title{my longevity method1}
+\title{mylongevity_method1}
 \usage{
 mylongevity_method1(data, indexes_of_variables)
 }

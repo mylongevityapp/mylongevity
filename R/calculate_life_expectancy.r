@@ -1,9 +1,25 @@
+#' calculate_life_expectancy
+#'
+#' This function calculates life expectancy table based on inputs
+#' @param age age
+#' @param a - intercept of Gompertz baseline hazards
+#' @param b - slope of Gompertz baseline hazards
+#' @param vector_of_coefficients - vector of coefficients from cox-model
+#' @param log_hazard_ratio - log hazard rations from cox-model
+#' @param data_for_weights - weights, i.e proportions for each generated combination
+#' @param working_directory - the working directory for any data that is produced from the functions to be saved in a folder
+#' @keywords life_expectancy
+#' @export
+#' @examples
+#' @return data frame with life expectancies for given data frame of clients
+#' calculate_life_expectancy()
+
 calculate_life_expectancy<-
 function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,working_directory){
     ##creating a temporary folder to store all temporary files
     temporary_folder <- paste("temp",sep = "")
 	temporary_files_directory <- paste(working_directory,temporary_folder,sep="/")
-	dir.create(temporary_files_directory)	
+	dir.create(temporary_files_directory)
 	##removing digits from string verctor of coefficients
 	vector_of_coefficients_with_no_integers <- gsub('[[:digit:]]+', '', vector_of_coefficients)
 	#extracting unique variables from a model and number of total variables
@@ -21,9 +37,9 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 		temporary_table_for_coefficient <- data.frame(unique_coefficients[coefficient],(length(current_variable)),baseline_category_index,max_category_index)
 		names(temporary_table_for_coefficient) <- c("variable","count","baseline_category_index","max_category_index")
 		table_of_unique_coefficients <- rbind(table_of_unique_coefficients,temporary_table_for_coefficient)
-	}		
+	}
 	##table_of_unique_coefficients shows the baseline category, maxim level of categories and the number of categories
-	
+
 	temp_variable=paste("",sep = "")
 	all_start_for_loops<-paste("",sep = "")
 	all_end_for_loops<-paste("",sep = "")
@@ -41,10 +57,10 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 		names(temp_data_frame)<-as.character(current_variable)
 		table_for_all_possible_combination_of_variables<-cbind(table_for_all_possible_combination_of_variables,temp_data_frame)
 	}
-    
-    ##creating a table for all possible combinations of variables in a model	
+
+    ##creating a table for all possible combinations of variables in a model
 	table_for_all_possible_combination_of_variables<-table_for_all_possible_combination_of_variables[,-1]
-	
+
 	string_to_create_a_data_frame=""
 	for(i in 1:nrow(table_of_unique_coefficients)){
 		if(i<nrow(table_of_unique_coefficients)){
@@ -56,7 +72,7 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 	}
     string_to_create_a_data_frame <- paste("my_table=data.frame(",string_to_create_a_data_frame,")",sep="")
     ######################################################################################################
-    
+
 	combination_weights=""
 	creation_of_subdata="subdata=data_for_weights["
 	for(i in 1:(length(unique_coefficients)-1)){
@@ -76,9 +92,9 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 	code_line_for_sub_weight,
 	paste("combination=rbind(combination,my_table)"),
 	all_end_for_loops,paste("return(combination)}")),fileConn2)
-	
+
 	source(paste(temporary_files_directory,"/temp_file_for_combinations.txt",sep=""))
-	###This is the table for all possible combination of factors that we have 
+	###This is the table for all possible combination of factors that we have
 	table_of_combinations<-function_for_table(data_for_weights=data_for_weights)
 
 
@@ -118,12 +134,12 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 		##############################################################################################################
 		table_of_combinations$Betas <- all_coefficient
 		table_of_combinations$age <- age
-		table_of_combinations$a <- a 
+		table_of_combinations$a <- a
 		table_of_combinations$b <- b
 
     no_numbers=gsub('[[:digit:]]+', '', vector_of_coefficients)
 	unique_coefficients=unique(no_numbers)
-	
+
 	##table_of_unique_coefficients shows the baseline category and the number of categories
 	table_of_unique_coefficients=NULL
 	for(coefficient in 1:length(unique_coefficients)){
@@ -166,11 +182,11 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 	code_line_for_b<-"b<-mydata$b"
 	code_line_for_weight<-"weight<-mydata$proportion"
 	code_line_for_Betas<-"all_covariates<-mydata$Betas"
-	
+
 	local_directory<-paste(temporary_files_directory,"/equation.txt",sep="")
 	file_directory<-paste("fileConn <- file(paste(\"",local_directory,"\",sep = \"\"))",sep="")
 	source_directory<-paste("source(\"",local_directory,"\")",sep="")
-	
+
 	path_to_file_for_all_combinations<-file(paste(temporary_files_directory,"/file_for_all_combinations_of_factors.txt",sep = ""))### creating a text file
 	writeLines(c(
 		paste("calculate_a0T<-function(data_with_life_expectancies){"),
@@ -209,6 +225,6 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 	),path_to_file_for_all_combinations)
 
 	source(paste(temporary_files_directory,"/file_for_all_combinations_of_factors.txt",sep = ""))
-	table_with_mu<-suppressWarnings(calculate_a0T(data_with_life_expectancies=table_of_combinations))	
+	table_with_mu<-suppressWarnings(calculate_a0T(data_with_life_expectancies=table_of_combinations))
 	return(table_with_mu)
 	}
