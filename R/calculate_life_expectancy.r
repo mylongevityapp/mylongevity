@@ -60,8 +60,9 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 
     ##creating a table for all possible combinations of variables in a model
 	table_for_all_possible_combination_of_variables<-table_for_all_possible_combination_of_variables[,-1]
-
-	string_to_create_a_data_frame=""
+    string_to_create_a_data_frame=""
+    if(length(unique_coefficients)>1) {
+	
 	for(i in 1:nrow(table_of_unique_coefficients)){
 		if(i<nrow(table_of_unique_coefficients)){
 			mydata_i <- paste(names(table_for_all_possible_combination_of_variables)[i],",")
@@ -72,15 +73,28 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 	}
     string_to_create_a_data_frame <- paste("my_table=data.frame(",string_to_create_a_data_frame,")",sep="")
     ######################################################################################################
+    } else {
+	mydata_i <- paste(as.character(table_of_unique_coefficients$variable))
+	string_to_create_a_data_frame <- paste(string_to_create_a_data_frame,mydata_i)
+	string_to_create_a_data_frame <- paste("my_table=data.frame(",string_to_create_a_data_frame,")",sep="")
+	}
+	
 
 	combination_weights=""
 	creation_of_subdata="subdata=data_for_weights["
-	for(i in 1:(length(unique_coefficients)-1)){
-		creation_of_sub_variables=paste("data_for_weights$",unique_coefficients[i],"==",unique_coefficients[i],"&",sep="")
-		combination_weights<-paste(combination_weights,creation_of_sub_variables)
-	}
 
-	sub_data_selection_by_last_variable=paste("data_for_weights$",unique_coefficients[length(unique_coefficients)],"==",unique_coefficients[length(unique_coefficients)],",]",sep="")
+    if(length(unique_coefficients)>1){
+    for(i in 1:(length(unique_coefficients)-1)){
+      creation_of_sub_variables=paste("data_for_weights$",unique_coefficients[i],"==",unique_coefficients[i],"&",sep="")
+      combination_weights<-paste(combination_weights,creation_of_sub_variables)
+    }
+	sub_data_selection_by_last_variable<-paste("data_for_weights$",unique_coefficients[length(unique_coefficients)],"==",unique_coefficients[length(unique_coefficients)],",]",sep="")
+
+	} else {
+    creation_of_sub_variables=paste("data_for_weights$",unique_coefficients[1],"==",unique_coefficients[1],sep="")
+    combination_weights<-paste(combination_weights,creation_of_sub_variables)
+    sub_data_selection_by_last_variable<-",]"
+    }
 
 	final_sub_weight<-paste(creation_of_subdata,combination_weights,sub_data_selection_by_last_variable,sep="")
 	code_line_for_sub_weight<-paste("my_table$proportion<-nrow(subdata)/nrow(data_for_weights)")
@@ -168,14 +182,22 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 		all_ends_for_loops0<-paste(all_ends_for_loops0,end_for_loop)
 	}
 
+
 	combination_weights=""
 	creation_of_subdata="mydata=data_with_life_expectancies["
+	if(length(unique_coefficients)>1){	
 	for(i in 1:(length(unique_coefficients)-1)){
 		temportary0=paste("data_with_life_expectancies$",unique_coefficients[i],"==",unique_coefficients[i],"&",sep="")
 		combination_weights<-paste(combination_weights,temportary0)
 	}
-
 	sub_data_selection_by_last_variable=paste("data_with_life_expectancies$",unique_coefficients[length(unique_coefficients)],"==",unique_coefficients[length(unique_coefficients)],",]",sep="")
+    } else {   
+    creation_of_sub_variables=paste("data_with_life_expectancies$",unique_coefficients[1],"==",unique_coefficients[1],sep="")
+    combination_weights<-paste(combination_weights,creation_of_sub_variables)
+    sub_data_selection_by_last_variable<-",]"
+    }
+
+
 
 	final_sub_weight<-paste(creation_of_subdata,combination_weights,sub_data_selection_by_last_variable,sep="")
 	code_line_for_age<-"age<-mydata$age"
