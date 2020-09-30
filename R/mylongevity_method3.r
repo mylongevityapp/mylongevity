@@ -18,7 +18,7 @@
 #' @return data frame with life expectancies for given data frame of clients
 #' mylongevity_method3()
 mylongevity_method3 <- function(data,indexes_of_variables,list_of_variables,age,a,b,
-T_start_indicator,T_stop_indicator,status_indicator,working_directory){
+T_start_indicator,T_stop_indicator=NULL,status_indicator,working_directory){
 	if (missing(data))
 		stop("Must specify a data via the 'data' argument.")
 	if (missing(indexes_of_variables))
@@ -45,13 +45,10 @@ T_start_indicator,T_stop_indicator,status_indicator,working_directory){
 	if (missing(T_start_indicator)){
 		stop("Must specify follow up time via the 'T_start_indicator' argument.")
 	}
-	if (missing(T_stop_indicator)){
-		stop("Must specify T_stop_indicator via the 'T_stop_indicator' argument.")
-	}
 	if (missing(status_indicator)){
 		stop("Must specify status_indicator via the 'status_indicator' argument.")
 	}
-
+		
 	sub_data <- data[,indexes_of_variables]
 	model_variables <- ""
 	for(i in 1:(length(list_of_variables)-1)){
