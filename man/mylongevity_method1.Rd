@@ -13,11 +13,44 @@ mylongevity_method1(data, indexes_of_variables)
 }
 \value{
 data frame with life expectancies for given data frame of clients
-mylongevity_method1()
 }
 \description{
 This function loads a file as a data frame of clients.
 Using the argument 'indexes_of_variables', this function selects the columns of factors
 and matches them to outcomes of life expectancy calculator https://mylongevity.org/about
+}
+\details{
+This method matches the attributes of inputted data with results of life expectancies from the landmark analysis described in Kulinskaya et al. (2020c). For a set of given attributes, this method produces a table with life expectancies at a given age  similar to those provided on the website https://mylongevity.org/ , see also Kulinskaya et al. (2020a).
+
+For mylongevity_method1, user has to specify the data and columns using the argument indexes_of_variables in following order: age,gender,townsend,smokerCategory,htn,diabetesCategory,hcl,bmiCategory,qRiskCategory,statins.
+
+The definition of columns are:
+   -	age is a variable with numeric value which stands for number of years from the date of birth. age should only take values between 60 and 85
+   -	Gender is a string variable which stands for gender of individual with possible values "M" for males and "F" for females
+   -	Townsend is a deprivation index which takes values 1 (least deprived), 2, 3, 4, 5 (most deprived). The Townsend variable measures the prosperity of area where individual lives.
+   -	smokerCategory is a categorical variable with numeric value which defines if individual is smoker or not: (1 - no smoker, 2 - ex smoker, 3 - smoker)
+   -	htn is a categorical variable with numeric value for treated hypertension status. 1 - no hypertension, 2 - treated hypertension, 3 - untreated hypertension
+   -	diabetesCategory is a categorical variable with numeric value for diabetes status. 0 - no diabetes, 1 - diabetes
+   -	hcl is a categorical variable with numeric value for hypercholesteromia. 0 - no hypercholesteromia, 1 - hypercholesteromia
+   -	bmiCategory is a categorical variable with numeric value for Body Mass Index  categories (1 - Healthy weight (BMI<25), 2 - Overweight (BMI>=25 and BMI<30), 3 - Obese (BMI>=30))
+   -	qRiskCategory is a categorical variable with numeric value for cardiovascular disease risk measured by QRISK2 https://qrisk.org/2017/ (2 - for low risk (QRISK2<20), 0 - for moderate risk (QRISK2>=20 and QRISK2<40), 1 - for high risk (QRISK2>=40 or diagnosis of CVD))
+   -	statins is a categorical variable with numeric value for statin prescription status (0 - no statin intake, 1 - on statin/prescribed statin)
+}
+\examples{
+set.seed(1234)
+n<-1000
+age <-round(runif(n, min = 60, max = 85))
+gender <- c(rep('M',times=n/2),rep('F',times=n/2))
+townsend <- round(runif(n, min = 1, max = 5))
+smokerCategory <- round(runif(n, min = 1, max = 3))
+htn  <- round(runif(n, min = 1, max = 3))
+diabetesCategory  <- round(runif(n, min = 0, max = 1))
+hcl <- round(runif(n, min = 0, max = 1))
+bmiCategory <- round(runif(n, min = 1, max = 3))
+qRiskCategory <- round(runif(n, min = 0, max = 2))
+statins <- round(runif(n, min = 0, max = 1))
+data_of_clients <- data.frame(age,gender,townsend,smokerCategory,htn,diabetesCategory,hcl,bmiCategory,qRiskCategory,statins)
+indexes_for_columns <- c(1,2,3,4,5,6,7,8,9,10)
+life_expectancy_table=mylongevity_method1(data=data_of_clients,indexes_of_variables=indexes_for_columns)
 }
 \keyword{life_expectancy}

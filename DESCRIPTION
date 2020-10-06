@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Ilyas Bakbergenuly
 Maintainer: The package maintainer <i.bakbergenuly@uea.ac.uk>
 Description: This package calculates life expectancies based on results of a project 
-    "Use of Big Health and Actuarial Data for Understanding Longevity and Morbidity Risks"
+    Use of Big Health and Actuarial Data for Understanding Longevity and Morbidity Risks.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true

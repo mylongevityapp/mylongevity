@@ -32,4 +32,37 @@ Using the argument 'indexes_of_variables', this function selects the columns of 
 Then using the argument 'list_of_variables' this functions selects the columns of interest to be matched
 with coefficients (i.e log-hazard ratios) estimated in analysis
 }
+\details{
+This method calculates life expectancies using the log-hazard ratio estimates from the landmark analysis Kulinskaya et al. (2020c) and the weights of the risk groups estimated from the given dataset. These weights correspond to frequencies of risk profiles in the dataset.
+
+mylongevity_method2 uses log-hazard ratio coefficients from website mylongevity.org with inputted data. mylongevity_method2 takes the log-hazard ratio coefficients and calculates the weights from data.
+
+For mylongevity_method2 user should specify the directory where all the temporary files will be stored. The directory should be specified as working_directory=' E:/myproject'. A folder called 'temp' will be created in the specified directory. This is the folder where all necessary/temporary files will be stored. Also for method 2 and method 3 we need a function - function_for_table_of_combination() and a function calculate_life_expectancy() which are separate functions within this R package.
+For mylongevity_method2, user has to input the data with columns of interest using the argument 'indexes_of_variables'. Also, user has to specify the particular age of interest for a given data to select the corresponding log-hazard ratio coefficients from landmark model for a particular age.  User also has to specify values for a and b for Gompertz distribution. User has to specify the names of variables which will be used in calculation with the same names as in inputted data using the variable list_of_variables
+For mylongevity_method2, user can only input columns for variables
+('statins','cvd_risk','diabetes','HTN_diag_treat','hypercholesterolaemia','BMI','Smoking')
+User has to specify the variables of interest using the argument 'list_of_variables'.
+The order of specified columns using the argument 'indexes_of_variables' should match the variables of interest 'list_of_variables' by names.
+}
+\examples{
+set.seed(1234)
+n<-1000
+gender <- c(rep('M',times=n/2),rep('F',times=n/2))
+townsend <- round(runif(n, min = 1, max = 5))
+smokerCategory <- round(runif(n, min = 1, max = 3))
+HTN_diag_treat  <- round(runif(n, min = 1, max = 3))
+diabetes  <- round(runif(n, min = 0, max = 1))
+hypercholesterolaemia <- round(runif(n, min = 0, max = 1))
+bmiCategory <- round(runif(n, min = 1, max = 3))
+cvd_risk <- round(runif(n, min = 0, max = 2))
+statins <- round(runif(n, min = 0, max = 1))
+age <-61
+a <- (-12.459132)
+b <- 0.11764571
+list_of_variables <- c("statins","cvd_risk","diabetes","HTN_diag_treat","hypercholesterolaemia")
+data <- data.frame(statins,cvd_risk,diabetes,HTN_diag_treat,hypercholesterolaemia)
+indexes_of_variables <- c(1,2,3,4,5)
+working_directory <-"E:/development_of_R_package"
+life_expectancy_table_method2<-mylongevity_method2(data=data,indexes_of_variables=indexes_of_variables,list_of_variables,age,a,b,working_directory)
+}
 \keyword{life_expectancy}
