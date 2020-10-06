@@ -5,7 +5,7 @@
 \title{my longevity method3}
 \usage{
 mylongevity_method3(data, indexes_of_variables, list_of_variables, age, a,
-  b, T_start_indicator, T_stop_indicator, status_indicator,
+  b, T_start_indicator, T_stop_indicator = NULL, status_indicator,
   working_directory)
 }
 \arguments{
