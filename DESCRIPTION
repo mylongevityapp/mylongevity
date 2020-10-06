@@ -15,4 +15,5 @@ Imports:
 	expint, 
 	survival,
 	MASS
+Depends: R(>= 3.4.2)	
 RoxygenNote: 6.1.1
