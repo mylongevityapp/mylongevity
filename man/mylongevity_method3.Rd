@@ -17,6 +17,10 @@ mylongevity_method3(data, indexes_of_variables, list_of_variables, age, a,
 
 \item{age}{age of clients}
 
+\item{a}{intercept from Gompertz baseline hazards}
+
+\item{b}{slope from Gompertz baseline hazards}
+
 \item{T_start_indicator}{for right censored data, this is the follow up time. For interval data, the first argument is the starting time for the interval}
 
 \item{T_stop_indicator}{ending time of the interval for interval censored or counting process data only. Intervals are assumed to be open on the left and closed on the right, (start, end]. For counting process data, event indicates whether an event occurred at the end of the interval}

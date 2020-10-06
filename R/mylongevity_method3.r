@@ -7,6 +7,8 @@
 #' @param data given data frame of clients
 #' @param indexes_of_variables indices for columns of interest
 #' @param list_of_variables columns of interest to be matched to coefficients (i.e log-hazard ratios)
+#' @param a intercept from Gompertz baseline hazards
+#' @param b slope from Gompertz baseline hazards
 #' @param age age of clients
 #' @param T_start_indicator for right censored data, this is the follow up time. For interval data, the first argument is the starting time for the interval
 #' @param T_stop_indicator ending time of the interval for interval censored or counting process data only. Intervals are assumed to be open on the left and closed on the right, (start, end]. For counting process data, event indicates whether an event occurred at the end of the interval
@@ -48,7 +50,7 @@ T_start_indicator,T_stop_indicator=NULL,status_indicator,working_directory){
 	if (missing(status_indicator)){
 		stop("Must specify status_indicator via the 'status_indicator' argument.")
 	}
-		
+
 	sub_data <- data[,indexes_of_variables]
 	model_variables <- ""
 	for(i in 1:(length(list_of_variables)-1)){
@@ -67,7 +69,7 @@ T_start_indicator,T_stop_indicator=NULL,status_indicator,working_directory){
 	}
 
 	if(missing(cox_model)){
-		stop(mstyle$stop("Must specify T_start_indicator,T_stop_indicator, status_indicator arguments to fit a proportional cox regression cox regression."))
+		stop("Must specify T_start_indicator,T_stop_indicator, status_indicator arguments to fit a proportional cox regression cox regression.")
 	}
 	cox_model_coefficients <- cox_model$coefficients
 	model_coefficients <- names(cox_model_coefficients)
