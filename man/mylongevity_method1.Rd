@@ -38,6 +38,7 @@ The definition of columns are:
 }
 \examples{
 set.seed(1234)
+library(mylongevity)
 n<-1000
 age <-round(runif(n, min = 60, max = 85))
 gender <- c(rep('M',times=n/2),rep('F',times=n/2))
@@ -51,6 +52,6 @@ qRiskCategory <- round(runif(n, min = 0, max = 2))
 statins <- round(runif(n, min = 0, max = 1))
 data_of_clients <- data.frame(age,gender,townsend,smokerCategory,htn,diabetesCategory,hcl,bmiCategory,qRiskCategory,statins)
 indexes_for_columns <- c(1,2,3,4,5,6,7,8,9,10)
-life_expectancy_table=mylongevity_method1(data=data_of_clients,indexes_of_variables=indexes_for_columns)
+mylongevity_method1(data=data_of_clients,indexes_of_variables=indexes_for_columns)
 }
 \keyword{life_expectancy}

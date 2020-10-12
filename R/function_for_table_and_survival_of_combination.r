@@ -1,5 +1,4 @@
 #' function_for_table_of_combination
-#'
 #' This function produces table with different combinations of scenarious and life expectancies
 #' @param age age
 #' @param a - intercept of Gompertz baseline hazards
@@ -10,7 +9,6 @@
 #' @param working_directory - the working directory for any data that is produced from the functions to be saved in a folder
 #' @keywords life_expectancy
 #' @export
-#' @examples
 #' @return data frame with life expectancies for given data frame of clients
 #' function_for_table_of_combination()
 

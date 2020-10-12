@@ -3,10 +3,18 @@
 %   R/function_for_table_and_survival_of_combination.r
 \name{function_for_table_of_combination}
 \alias{function_for_table_of_combination}
-\title{function_for_table_of_combination}
+\title{function_for_table_of_combination
+This function produces table with different combinations of scenarious and life expectancies}
 \usage{
-function_for_table_of_combination(age, a, b, vector_of_coefficients,
-  LogHazardRations, data_for_weights, working_directory)
+function_for_table_of_combination(
+  age,
+  a,
+  b,
+  vector_of_coefficients,
+  LogHazardRations,
+  data_for_weights,
+  working_directory
+)
 }
 \arguments{
 \item{age}{age}
@@ -28,6 +36,7 @@ data frame with life expectancies for given data frame of clients
 function_for_table_of_combination()
 }
 \description{
+function_for_table_of_combination
 This function produces table with different combinations of scenarious and life expectancies
 }
 \keyword{life_expectancy}

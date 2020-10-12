@@ -1,4 +1,4 @@
-#' my longevity method2
+#' mylongevity_method2
 #'
 #' This function loads a file as a data frame of clients.
 #' Using the argument 'indexes_of_variables', this function selects the columns of factors
@@ -25,7 +25,7 @@
 #' @export
 #' @examples
 #' set.seed(1234)
-#' n<-1000
+#' n <- 1000
 #' gender <- c(rep('M',times=n/2),rep('F',times=n/2))
 #' townsend <- round(runif(n, min = 1, max = 5))
 #' smokerCategory <- round(runif(n, min = 1, max = 3))
@@ -35,16 +35,16 @@
 #' bmiCategory <- round(runif(n, min = 1, max = 3))
 #' cvd_risk <- round(runif(n, min = 0, max = 2))
 #' statins <- round(runif(n, min = 0, max = 1))
-#' age <-61
+#' age <- 61
 #' a <- (-12.459132)
 #' b <- 0.11764571
-#' list_of_variables <- c("statins","cvd_risk","diabetes","HTN_diag_treat","hypercholesterolaemia")
-#' data <- data.frame(statins,cvd_risk,diabetes,HTN_diag_treat,hypercholesterolaemia)
+#' list_of_variables<-c("statins","cvd_risk","diabetes","HTN_diag_treat","hypercholesterolaemia")
+#' data<-data.frame(statins,cvd_risk,diabetes,HTN_diag_treat,hypercholesterolaemia)
 #' indexes_of_variables <- c(1,2,3,4,5)
-#' working_directory <-"E:/development_of_R_package"
-#' life_expectancy_table_method2<-mylongevity_method2(data=data,indexes_of_variables=indexes_of_variables,list_of_variables,age,a,b,working_directory)
+#' working_directory<-"E:/THIN data backup 10122019/development_of_R_package"
+#' mylongevity_method2(data=data,indexes_of_variables=indexes_of_variables,list_of_variables,age,a,b,working_directory)
 #' @return data frame with life expectancies for given data frame of clients
-#' mylongevity_method2()
+#'
 mylongevity_method2<-function(data,indexes_of_variables,list_of_variables,age,a,b,working_directory){
 	if (missing(data))
 		stop("Must specify a data via the 'data' argument.")

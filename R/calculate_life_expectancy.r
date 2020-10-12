@@ -1,5 +1,4 @@
 #' calculate_life_expectancy
-#'
 #' This function calculates life expectancy table based on inputs
 #' @param age age
 #' @param a - intercept of Gompertz baseline hazards
@@ -10,7 +9,6 @@
 #' @param working_directory - the working directory for any data that is produced from the functions to be saved in a folder
 #' @keywords life_expectancy
 #' @export
-#' @examples
 #' @return data frame with life expectancies for given data frame of clients
 #' calculate_life_expectancy()
 
@@ -62,7 +60,7 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 	table_for_all_possible_combination_of_variables<-table_for_all_possible_combination_of_variables[,-1]
     string_to_create_a_data_frame=""
     if(length(unique_coefficients)>1) {
-	
+
 	for(i in 1:nrow(table_of_unique_coefficients)){
 		if(i<nrow(table_of_unique_coefficients)){
 			mydata_i <- paste(names(table_for_all_possible_combination_of_variables)[i],",")
@@ -78,7 +76,7 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 	string_to_create_a_data_frame <- paste(string_to_create_a_data_frame,mydata_i)
 	string_to_create_a_data_frame <- paste("my_table=data.frame(",string_to_create_a_data_frame,")",sep="")
 	}
-	
+
 
 	combination_weights=""
 	creation_of_subdata="subdata=data_for_weights["
@@ -185,13 +183,13 @@ function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,workin
 
 	combination_weights=""
 	creation_of_subdata="mydata=data_with_life_expectancies["
-	if(length(unique_coefficients)>1){	
+	if(length(unique_coefficients)>1){
 	for(i in 1:(length(unique_coefficients)-1)){
 		temportary0=paste("data_with_life_expectancies$",unique_coefficients[i],"==",unique_coefficients[i],"&",sep="")
 		combination_weights<-paste(combination_weights,temportary0)
 	}
 	sub_data_selection_by_last_variable=paste("data_with_life_expectancies$",unique_coefficients[length(unique_coefficients)],"==",unique_coefficients[length(unique_coefficients)],",]",sep="")
-    } else {   
+    } else {
     creation_of_sub_variables=paste("data_with_life_expectancies$",unique_coefficients[1],"==",unique_coefficients[1],sep="")
     combination_weights<-paste(combination_weights,creation_of_sub_variables)
     sub_data_selection_by_last_variable<-",]"

@@ -2,10 +2,18 @@
 % Please edit documentation in R/calculate_life_expectancy.r
 \name{calculate_life_expectancy}
 \alias{calculate_life_expectancy}
-\title{calculate_life_expectancy}
+\title{calculate_life_expectancy
+This function calculates life expectancy table based on inputs}
 \usage{
-calculate_life_expectancy(age, a, b, vector_of_coefficients,
-  log_hazard_ratio, data_for_weights, working_directory)
+calculate_life_expectancy(
+  age,
+  a,
+  b,
+  vector_of_coefficients,
+  log_hazard_ratio,
+  data_for_weights,
+  working_directory
+)
 }
 \arguments{
 \item{age}{age}
@@ -27,6 +35,7 @@ data frame with life expectancies for given data frame of clients
 calculate_life_expectancy()
 }
 \description{
+calculate_life_expectancy
 This function calculates life expectancy table based on inputs
 }
 \keyword{life_expectancy}

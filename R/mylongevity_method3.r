@@ -1,4 +1,4 @@
-#' my longevity method3
+#' mylongevity_method3
 #'
 #' This function loads a file as a data frame of clients.
 #' Using the argument 'indexes_of_variables', this function selects the columns of factors
@@ -15,7 +15,6 @@
 #' @param status_indicator the status indicator, normally 0=alive, 1=dead
 #' @param working_directory the working directory for any data that is produced from the functions to be saved in a folder
 #' @details This method fits the Cox regression to the provided data, eliminates non-significant terms, calculates weights for each combination of risk factors in the final Cox regression model and computes life expectancies based on a paper Kulinskaya et al. (2020b).  We recommend to include sex and some measure of deprivation in the list of risk factors to be explored. At the moment, we can only include additive terms to the model without interactions. Also in this method we can only include categorical risk factors because we need to split the population into different risk subgroups. If there is any continuous variable, then it should be factored into a categorical one. If none of the variables in the model are significant, this method does not produce any output.
-#'
 #' For mylongevity_method3 user should specify the directory where all the temporary files will be stored. The directory should be specified as working_directory='E:/myproject'. A folder called 'temp' will be created in the specified directory. This is the folder where all necessary/temporary files will be stored. Also for method 2 and method 3 we need a function - function_for_table_of_combination() and a function calculate_life_expectancy() which are separate functions within this R package.
 #' mylongevity_method3 fits the proportional hazards Cox regression using R package 'survival' and seeks  the best model using the backward elimination with the AIC criterion.
 #' User has to input the data and specify the columns for K independent variables to put in Cox regression using the argument 'indexes_of_variables' and state the list of variable 'list_of_variables'.  The argument 'list_of_variables' and the first K elements in a vector
@@ -24,7 +23,6 @@
 #' In package 'survival, the proportional hazards Cox regression can be fitted with a time to event   outcome variable or by specifying  an interval for  follow up (FU) times. If using time to event, the vector 'indexes_of_variables' should additionally have columns specified for time to event and status indicator in position K+1 and K+2, respectively. For interval FU data, 'indexes_of_variables' should additionally  have columns specified for the FU starting time, FU ending time and status indicator in positions K+1,K+2 and K+3, respectively.
 #' In functions mylongevity_method3(), the arguments T_start_indicator, T_stop_indicator, status_indicator correspond to the FU starting time, FU ending time and status indicator,   usually 0=alive, 1=dead.  If using  time to event, the argument T_start_indicator corresponds to follow up time and status_indicator  is usually coded  0=alive, 1=dead. In this case, the argument T_stop_indicator does not need to be specified.
 #' To fit the Cox regression to time to event data, user has to include either time to event and status using the variables T_start_indicator and status _indicator to fit a model with non-interval data as "Surv(time=', T_start_indicator,',event=', status _indicator,')~' or using the variables T_start_indicator, T_stop_indicator and status _indicator for interval censored or counting process data as 'Surv(time=',T_start_indicator,',time2=', T_stop_indicator,',event=', status _indicator,')~'.
-#'
 #' @keywords life_expectancy
 #' @export
 #' @examples
@@ -47,15 +45,15 @@
 #' T_stop_indicator <-  "Tstop"
 #' status_indicator <-  "death"
 #' age <-70
-#' a <- (-12.459132)
-#' b <- 0.11764571
-#' indexes_of_variables <- c(1,2,3,4,5,6,7,8,9,10,11,12)
-#' list_of_variables <- c("statins","cvd_risk","diabetes","HTN_diag_treat","hypercholesterolaemia","bmiCategory","smokerCategory","townsend","aspirin")
+#' a=-12.459132
+#' b=0.11764571
+#' indexes_of_variables<-c(1,2,3,4,5,6,7,8,9,10,11,12)
+#' list_of_variables<-c("statins","cvd_risk","diabetes","HTN_diag_treat","hypercholesterolaemia","bmiCategory","smokerCategory","townsend","aspirin")
+#' working_directory<-"E:/THIN data backup 10122019/development_of_R_package"
 #' data<-data.frame(statins,cvd_risk,diabetes,HTN_diag_treat,hypercholesterolaemia,bmiCategory,smokerCategory,townsend,aspirin,Tstart,Tstop,death)
-#' working_directory <- "E:/development_of_R_package"
-#' life_expectancy_table_method3 <- mylongevity_method3(data=data,indexes_of_variables=indexes_of_variables,list_of_variables,age,a,b,T_start_indicator,T_stop_indicator,status_indicator,working_directory)
+#' mylongevity_method3(data,indexes_of_variables,list_of_variables,age,a,b,T_start_indicator,T_stop_indicator,status_indicator,working_directory)
 #' @return data frame with life expectancies for given data frame of clients
-#' mylongevity_method3()
+#'
 mylongevity_method3 <- function(data,indexes_of_variables,list_of_variables,age,a,b,
 T_start_indicator,T_stop_indicator=NULL,status_indicator,working_directory){
 	if (missing(data))
