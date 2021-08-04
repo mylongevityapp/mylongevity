@@ -1,1 +1,1 @@
-This is the R package for calculation of life expectancy 
+This is the R package for calculation of life expectancy This package calculates life expectancies based on results of a project Use of Big Health and Actuarial Data for Understanding Longevity and Morbidity Risks. More details about the project is available on https://www.uea.ac.uk/groups-and-centres/big-health-actuarial-data. 
