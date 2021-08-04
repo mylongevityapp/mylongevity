@@ -9,11 +9,24 @@ Description: This package calculates life expectancies based on results of a pro
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Depends: R(>= 3.4.2) 	
 RoxygenNote: 7.1.1
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
 Imports: 
-    expint,
     sqldf,
-    MASS,
     stringr,
-    survival
+    MASS,
+    survival,
+    rlang,
+    ucminf,
+    xtable,
+    readr,
+    stats,
+    dplyr,
+    expint
+Depends: 
+    R (>= 2.10)
