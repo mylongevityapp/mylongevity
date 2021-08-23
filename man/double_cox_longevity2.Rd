@@ -44,4 +44,38 @@ This function loads a file as a data frame of clients and fits parametric surviv
 \details{
 This method fits the Double Cox regression to the provided data and using the hazard ratios from scale and shape parameters it calculates the life expectancies for all combination of given categorical variables
 }
+\examples{
+#set.seed(1)
+#n<-10000
+#clinic<-as.factor(round(runif(n, min = 1, max = 1000)))###suppose we have 200 clinic
+#gender <- c(rep('M',times=n/2),rep('F',times=n/2))
+#townsend <- as.factor(round(runif(n, min = 1, max = 5)))
+#smokerCategory <- as.factor(round(runif(n, min = 1, max = 3)))
+#HTN_diag_treat  <- as.factor(round(runif(n, min = 1, max = 3)))
+#diabetes  <- as.factor(round(runif(n, min = 0, max = 1)))
+#hypercholesterolaemia <- as.factor(round(runif(n, min = 0, max = 1)))
+#bmiCategory <- as.factor(round(runif(n, min = 1, max = 3)))
+#age_cat<- as.factor(round(runif(n, min = 1, max = 3)))
+#birth_cohort<- as.factor(round(runif(n, min = 0, max = 3)))
+#cvd_risk <- as.factor(round(runif(n, min = 0, max = 2)))
+#statins <- as.factor(round(runif(n, min = 0, max = 1)))
+#aspirin<-as.factor(round(runif(n, min = 0, max = 1)))
+#age_c<-rnorm(n,mean=70, sd=10)
+#Tstart<-rep(60, times=n)
+#Tstop<-abs(rnorm(n,mean=70,sd= 6))
+#death<-sample(c(0,1), replace=TRUE, size=n)
+#T_start_indicator <- "Tstart"
+#T_stop_indicator <-  "Tstop"
+#status_indicator <-  "death"
+#working_directory<-"E:/Documentation for R package/"
+#data<-data.frame(clinic,statins,age_c,birth_cohort,cvd_risk,diabetes,HTN_diag_treat,hypercholesterolaemia,bmiCategory,age_cat,smokerCategory,townsend,aspirin,Tstart,Tstop,death)
+#data <- subset(data, Tstop>Tstart) #removing observations where Tstop happened before Tstart
+#age_of_diagnosis<-60 ##age at diagnosis
+#time_past_from_diagnosis<-5 ## time from diagnosis
+#cluster="clinic"
+#dist="Weibull"
+#formula.scale=as.formula("survival::Surv(Tstart,Tstop,death)~birth_cohort+age_c+HTN_diag_treat+smokerCategory")
+#formula.shape=as.formula("survival::Surv(Tstart,Tstop, death) ~birth_cohort")
+#double_cox_longevity2(data, dist, cluster, formula.shape, formula.scale,age_of_diagnosis,time_past_from_diagnosis,working_directory,name_for_age_factor="age_c")
+}
 \keyword{life_expectancy}

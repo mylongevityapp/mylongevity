@@ -11,7 +11,6 @@
 #' @export
 #' @return data frame with life expectancies for given data frame of clients
 #' function_for_table_of_combination()
-
 function_for_table_of_combination<-
 function(age,a,b,vector_of_coefficients,LogHazardRations,data_for_weights,working_directory){
     ##creating a temporary folder to store all temporary files

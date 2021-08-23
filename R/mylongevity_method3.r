@@ -25,6 +25,7 @@
 #' To fit the Cox regression to time to event data, user has to include either time to event and status using the variables T_start_indicator and status _indicator to fit a model with non-interval data as "Surv(time=', T_start_indicator,',event=', status _indicator,')~' or using the variables T_start_indicator, T_stop_indicator and status _indicator for interval censored or counting process data as 'Surv(time=',T_start_indicator,',time2=', T_stop_indicator,',event=', status _indicator,')~'.
 #' @keywords life_expectancy
 #' @export
+#' @return data frame with life expectancies for given data frame of clients
 #' @examples
 #' set.seed(1)
 #' n<-10000
@@ -49,11 +50,9 @@
 #' b=0.11764571
 #' indexes_of_variables<-c(1,2,3,4,5,6,7,8,9,10,11,12)
 #' list_of_variables<-c("statins","cvd_risk","diabetes","HTN_diag_treat","hypercholesterolaemia","bmiCategory","smokerCategory","townsend","aspirin")
-#' working_directory<-"E:/THIN data backup 10122019/development_of_R_package"
 #' data<-data.frame(statins,cvd_risk,diabetes,HTN_diag_treat,hypercholesterolaemia,bmiCategory,smokerCategory,townsend,aspirin,Tstart,Tstop,death)
-#' mylongevity_method3(data,indexes_of_variables,list_of_variables,age,a,b,T_start_indicator,T_stop_indicator,status_indicator,working_directory)
-#' @return data frame with life expectancies for given data frame of clients
-#'
+#' working_directory<-"E:/Documentation for R package/"
+#' mylongevity_method3(data=data, indexes_of_variables=indexes_of_variables,list_of_variables,age,a,b,T_start_indicator,T_stop_indicator,status_indicator,working_directory)
 mylongevity_method3 <- function(data,indexes_of_variables,list_of_variables,age,a,b,
 T_start_indicator,T_stop_indicator=NULL,status_indicator,working_directory){
 	if (missing(data))

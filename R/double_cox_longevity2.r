@@ -14,6 +14,39 @@
 #' @keywords life_expectancy
 #' @return data frame with life expectancies for given data frame of clients
 #' @export
+#' @examples
+#' #set.seed(1)
+#' #n<-10000
+#' #clinic<-as.factor(round(runif(n, min = 1, max = 1000)))###suppose we have 200 clinic
+#' #gender <- c(rep('M',times=n/2),rep('F',times=n/2))
+#' #townsend <- as.factor(round(runif(n, min = 1, max = 5)))
+#' #smokerCategory <- as.factor(round(runif(n, min = 1, max = 3)))
+#' #HTN_diag_treat  <- as.factor(round(runif(n, min = 1, max = 3)))
+#' #diabetes  <- as.factor(round(runif(n, min = 0, max = 1)))
+#' #hypercholesterolaemia <- as.factor(round(runif(n, min = 0, max = 1)))
+#' #bmiCategory <- as.factor(round(runif(n, min = 1, max = 3)))
+#' #age_cat<- as.factor(round(runif(n, min = 1, max = 3)))
+#' #birth_cohort<- as.factor(round(runif(n, min = 0, max = 3)))
+#' #cvd_risk <- as.factor(round(runif(n, min = 0, max = 2)))
+#' #statins <- as.factor(round(runif(n, min = 0, max = 1)))
+#' #aspirin<-as.factor(round(runif(n, min = 0, max = 1)))
+#' #age_c<-rnorm(n,mean=70, sd=10)
+#' #Tstart<-rep(60, times=n)
+#' #Tstop<-abs(rnorm(n,mean=70,sd= 6))
+#' #death<-sample(c(0,1), replace=TRUE, size=n)
+#' #T_start_indicator <- "Tstart"
+#' #T_stop_indicator <-  "Tstop"
+#' #status_indicator <-  "death"
+#' #working_directory<-"E:/Documentation for R package/"
+#' #data<-data.frame(clinic,statins,age_c,birth_cohort,cvd_risk,diabetes,HTN_diag_treat,hypercholesterolaemia,bmiCategory,age_cat,smokerCategory,townsend,aspirin,Tstart,Tstop,death)
+#' #data <- subset(data, Tstop>Tstart) #removing observations where Tstop happened before Tstart
+#' #age_of_diagnosis<-60 ##age at diagnosis
+#' #time_past_from_diagnosis<-5 ## time from diagnosis
+#' #cluster="clinic"
+#' #dist="Weibull"
+#' #formula.scale=as.formula("survival::Surv(Tstart,Tstop,death)~birth_cohort+age_c+HTN_diag_treat+smokerCategory")
+#' #formula.shape=as.formula("survival::Surv(Tstart,Tstop, death) ~birth_cohort")
+#' #double_cox_longevity2(data, dist, cluster, formula.shape, formula.scale,age_of_diagnosis,time_past_from_diagnosis,working_directory,name_for_age_factor="age_c")
 double_cox_longevity2<-function(data,dist,cluster,formula.shape,formula.scale,age_of_diagnosis,time_past_from_diagnosis,working_directory,name_for_age_factor=NULL){
 	if (missing(data))
 		stop("Must specify a data via the 'data' argument.")
@@ -570,7 +603,7 @@ data_with_life_expectancies$age_of_diagnosis<-age_of_diagnosis
 if(Sigma2!=0){
 
 if(!is.null(name_for_age_factor)){
-###Age is a continious covariate in scale
+###Age is a continuous covariate in scale
 if (dist=="Weibull") {
 #############################################numerator###################################################
 integral_of_Sx_Weibull<-function(time_to_event,a,b,beta_scaleU,beta_shapeU,sigma2){
@@ -584,8 +617,9 @@ v.life_expectancy<- Vectorize(life_expectancy_Weibull)
 #########################################################################################################
 cumH<-function(time_to_event,a,b,beta_scaleU,beta_shapeU){exp(beta_scaleU)*(time_to_event/a)^{b*exp(beta_shapeU)}}
 #########################################################################################################
+}
 
-} else if (dist=="Gompertz"){
+if (dist=="Gompertz"){
 #############################################numerator###################################################
 integral_of_Sx_Gompertz<-function(time_to_event,a,b,beta_scaleU,beta_shapeU,sigma2){
 	Sx<-(1+sigma2*(exp(beta_scaleU)*(a/b)*(exp(b*exp(beta_shapeU)*time_to_event)-1)))^{-1/sigma2}
@@ -609,8 +643,7 @@ temporary_files_directory<-working_directory
 
 fileConn3<-file(paste(temporary_files_directory,"table_with_life_expectancies.txt",sep = ""))
 data_with_life_expectancies_name_for_age_factor<-paste("data_with_life_expectancies$",name_for_age_factor,sep="")
-writeLines(c(paste("data_with_life_expectancies$cumH_at_t_time_past_from_diagnosis<-
-cumH(time_to_event=data_with_life_expectancies$time_past_from_diagnosis,a=data_with_life_expectancies$a,
+writeLines(c(paste("data_with_life_expectancies$cumH_at_t_time_past_from_diagnosis<-cumH(time_to_event=data_with_life_expectancies$time_past_from_diagnosis,a=data_with_life_expectancies$a,
 b=data_with_life_expectancies$b,
 beta_scaleU=(data_with_life_expectancies$betas_scale+",data_with_life_expectancies_name_for_age_factor,"*data_with_life_expectancies$age_of_diagnosis),
 beta_shapeU=data_with_life_expectancies$betas_shape)",sep=""),
@@ -619,14 +652,12 @@ beta_scaleU=data_with_life_expectancies$betas_scale,beta_shapeU=data_with_life_e
 paste("data_with_life_expectancies$life_expectancy<-data_with_life_expectancies$integral_of_Sx_numerator/exp(-data_with_life_expectancies$cumH_at_t_time_past_from_diagnosis)")
 ),fileConn3)
 
-
-
-source(paste(working_directory,"table_with_life_expectancies.txt",sep=""))
+source(paste(working_directory,"/table_with_life_expectancies.txt",sep=""),local=TRUE)
 
 
 } else {
 
-###Age is not a continious covariate in scale, however is age is included in as a categorical variable in
+###Age is not a continuous covariate in scale, however is age is included in as a categorical variable in
 ### scale covariate
 
 ####TO DO
@@ -674,5 +705,5 @@ data_with_life_expectancies$life_expectancy<-data_with_life_expectancies$integra
 stop("The variance of frailty is zero, hence integral of survival function can not be calculated. Change the model and try again.")
 }
 
-  return(data_with_life_expectancies)
+return(data_with_life_expectancies)
 }

@@ -82,8 +82,8 @@ a=-12.459132
 b=0.11764571
 indexes_of_variables<-c(1,2,3,4,5,6,7,8,9,10,11,12)
 list_of_variables<-c("statins","cvd_risk","diabetes","HTN_diag_treat","hypercholesterolaemia","bmiCategory","smokerCategory","townsend","aspirin")
-working_directory<-"E:/THIN data backup 10122019/development_of_R_package"
 data<-data.frame(statins,cvd_risk,diabetes,HTN_diag_treat,hypercholesterolaemia,bmiCategory,smokerCategory,townsend,aspirin,Tstart,Tstop,death)
-mylongevity_method3(data,indexes_of_variables,list_of_variables,age,a,b,T_start_indicator,T_stop_indicator,status_indicator,working_directory)
+working_directory<-"E:/Documentation for R package/"
+mylongevity_method3(data=data, indexes_of_variables=indexes_of_variables,list_of_variables,age,a,b,T_start_indicator,T_stop_indicator,status_indicator,working_directory)
 }
 \keyword{life_expectancy}

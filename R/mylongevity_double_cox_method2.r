@@ -23,6 +23,22 @@
 #' @keywords life_expectancy
 #' @return data frame with life expectancies for given data frame of clients
 #' @export
+#' @examples
+#' set.seed(1234)
+#' n<-1000
+#' B_cohort<-round(runif(n, min = 0, max = 3)) # indicator for year of birth  (0 - born in 1921-1930 , 1 - born in 1931-1940,  2 - born in  1941-1950, 3 - born in 1951-1960)
+#' BMIsmoke<-round(runif(n, min = 0, max = 5)) # indicator for interaction for body mass index and smoking (0 - Healthy or Overweight and Non Smoker, 1 - healthy weight and current smoker, 2 - healthy weight and ex smoker, 3, Obese and current smoker, 4 - Obese and ex-smoker, 5 - Obese and non-smoker)
+#' CHD<-round(runif(n, min = 0, max = 1)) # indicator for heart failure (0 - absence of coronary heart disease , 1 - presence of coronary heart disease)
+#' hrtcat<-round(runif(n, min = 0, max = 2)) # indicator for type of hormone replacement therapy (0 - non users of hormone replacement therapy, 1  - Combined Oestrogen and Progesteron , 2 - Oestrogen-only)
+#' DMIIsmoke<-round(runif(n, min = 0, max = 5)) # interaction of diabetes and smoking variables (0 -  non diabetic and non smoker,1 - non diabetic  and current smoker ,2 - non diabetic and ex-smoker,3 - diabetic and current smoker,4 - diabetic  and ex smoker ,5 - diabetic and non-smoker)
+#' opho<-round(runif(n, min = 1, max = 2)) # indicator of cases control group (0 - both uteras and ovarian not removed,  1 - both uteras and ovarian removed, 2 - ovaries removed but not uteras)
+#' hypertension<-round(runif(n, min = 0, max = 1)) # indicator for hypertension (0 - absence of Hypertension, 1 - Treated Hypertension 2 - Untreated Hypertension)
+#' deprivation <-round(runif(n, min = 0, max = 2))# deprivation index (0 - Low (Townsend 1 and Townsend 2), 1 - High (Townsend 4 and Townsend 5), 2 - Medium (Townsend 3))
+#' data<-data.frame(B_cohort,BMIsmoke,CHD,deprivation,DMIIsmoke,hrtcat,hypertension,opho)
+#' indexes_of_variables <- c(1,2,3,4,5,6,7,8)
+#' age_of_diagnosis=45
+#' time_past_from_diagnosis=1
+#' mylongevity_double_cox_method2(data, indexes_of_variables, age_of_diagnosis, time_past_from_diagnosis)
 mylongevity_double_cox_method2<-function(data,indexes_of_variables, age_of_diagnosis,time_past_from_diagnosis){
   if (missing(data))
     stop("Must specify a dataset via the 'data' argument.")
@@ -260,7 +276,7 @@ mylongevity_double_cox_method2<-function(data,indexes_of_variables, age_of_diagn
 	life_expectancy_table.betas_shape,
 	life_expectancy_table.betas_scale,
 	life_expectancy_table.life_expectancy/life_expectancy_table_controls.life_expectancy as LEratio,
-  life_expectancy_table.life_expectancy-life_expectancy_table_controls.life_expectancy as LEdifference
+    life_expectancy_table.life_expectancy-life_expectancy_table_controls.life_expectancy as LEdifference
 	FROM life_expectancy_table left join life_expectancy_table_controls
 	on
 	life_expectancy_table.B_cohort=life_expectancy_table_controls.B_cohort and

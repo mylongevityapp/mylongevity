@@ -23,9 +23,10 @@
 #' The order of specified columns using the argument 'indexes_of_variables' should match the variables of interest 'list_of_variables' by names.
 #' @keywords life_expectancy
 #' @export
+#' @return data frame with life expectancies for given data frame of clients
 #' @examples
 #' set.seed(1234)
-#' n <- 1000
+#' n<-1000
 #' gender <- c(rep('M',times=n/2),rep('F',times=n/2))
 #' townsend <- round(runif(n, min = 1, max = 5))
 #' smokerCategory <- round(runif(n, min = 1, max = 3))
@@ -35,16 +36,14 @@
 #' bmiCategory <- round(runif(n, min = 1, max = 3))
 #' cvd_risk <- round(runif(n, min = 0, max = 2))
 #' statins <- round(runif(n, min = 0, max = 1))
-#' age <- 61
-#' a <- (-12.459132)
-#' b <- 0.11764571
+#' age <-61
+#' a=-12.459132
+#' b=0.11764571
 #' list_of_variables<-c("statins","cvd_risk","diabetes","HTN_diag_treat","hypercholesterolaemia")
 #' data<-data.frame(statins,cvd_risk,diabetes,HTN_diag_treat,hypercholesterolaemia)
 #' indexes_of_variables <- c(1,2,3,4,5)
-#' working_directory<-"E:/THIN data backup 10122019/development_of_R_package"
+#' working_directory<-"E:/Documentation for R package/" #please edit this to your working directory
 #' mylongevity_method2(data=data,indexes_of_variables=indexes_of_variables,list_of_variables,age,a,b,working_directory)
-#' @return data frame with life expectancies for given data frame of clients
-#'
 mylongevity_method2<-function(data,indexes_of_variables,list_of_variables,age,a,b,working_directory){
 	if (missing(data))
 		stop("Must specify a data via the 'data' argument.")

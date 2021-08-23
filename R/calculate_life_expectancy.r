@@ -11,20 +11,19 @@
 #' @export
 #' @return data frame with life expectancies for given data frame of clients
 #' calculate_life_expectancy()
-
 calculate_life_expectancy<-
 function(age,a,b,vector_of_coefficients,log_hazard_ratio,data_for_weights,working_directory){
     ##creating a temporary folder to store all temporary files
     temporary_folder <- paste("temp",sep = "")
 	temporary_files_directory <- paste(working_directory,temporary_folder,sep="/")
 	dir.create(temporary_files_directory)
-	##removing digits from string verctor of coefficients
+	##removing digits from string vector of coefficients
 	vector_of_coefficients_with_no_integers <- gsub('[[:digit:]]+', '', vector_of_coefficients)
 	#extracting unique variables from a model and number of total variables
 	unique_coefficients <- unique(vector_of_coefficients_with_no_integers)
 	#creating a table for unique categories
 	table_of_unique_coefficients <- NULL
-	#now we can go through these unique categories and idenity how many factors each variable has
+	#now we can go through these unique categories and idenify how many factors each variable has
 	for(coefficient in 1:length(unique_coefficients)){
 		current_coefficient <- unique_coefficients[coefficient]
 		current_variable <- vector_of_coefficients[stringr::str_detect(vector_of_coefficients, current_coefficient)]

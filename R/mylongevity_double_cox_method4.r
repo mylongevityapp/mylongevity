@@ -33,6 +33,32 @@
 #' @keywords life_expectancy
 #' @return data frame with life expectancies for given data frame of clients
 #' @export
+#' @examples
+#' set.seed(1234)
+#' n<-1000
+#' birth_cohort<-round(runif(n, min = 0, max = 3)) #: indicator for year of birth (0 - born in 1908-1920, 1 - born in 1921-1930, 2 - born in  1931-1940, 3 - born in 1941 - 1960)
+#' sex<-round(runif(n, min = 1, max = 2)) #: indicator for gender (0 - Female , 1 - Male)
+#' IMD_Quintile<-round(runif(n, min = 1, max = 5)) #: deprivation index (1 (least deprived), 2, 3, 4, 5 (most deprived))
+#' BMI_category<-round(runif(n, min = 0, max = 1)) #: categorical variable with numeric value for Body Mass Index  categories (0 - Healthy weight (BMI<25), 1 - Overweight (BMI>=25 and BMI<30) and Obese (BMI>=30))
+#' asthma<-round(runif(n, min = 0, max = 1)) #: indicator for asthma (0 - absence of asthma, 1 - presence of asthma)
+#' COPD<-round(runif(n, min = 0, max = 1)) #: indicator for chronic obstructive pulmonary disease (0 - absense of chronic obstructive pulmonary disease, 1 - presence of chronic obstructive pulmonary disease)
+#' CKD<-round(runif(n, min = 0, max = 1)) #: indicator for chronic kidney disease (0 - absence of chronic kidney disease , 1 - presence of chronic kidney disease)
+#' myocardial_infarction<-round(runif(n, min = 0, max = 1)) #:  indicator for myocardial infarction (0 - absense of myocardial infarction, 1 - presence of myocardial infarction)
+#' PVD_PAD<-round(runif(n, min = 0, max = 1)) #: indicator for peripheral vascular disease (0 - absence of peripheral vascular disease, 1 - presence of peripheral vascular disease)
+#' SMOKING<-round(runif(n, min = 0, max = 2)) #: indicator of smoking status (0 non-smoker, 1 - current smoker, 2 - former smoker)
+#' alcohol_cat<-round(runif(n, min = 0, max = 1)) #: indicator for alcohol intake variable (0 – non -drinker, 1 - drinker)
+#' atrial_fibrillation<-round(runif(n, min = 0, max = 1)) #: indicator for atrial fibrillation  (0 - absence of atrial fibrillation, 1 - presence of atrial fibrillation)
+#' Diabetes_factor<-round(runif(n, min = 0, max = 2)) #: indicator for diabetes (0 – absence of diabetes or 1 - presence of diabetes and treated, 2 - absence of diabetes and untreated)
+#' anticoagulant_agents<-round(runif(n, min = 0, max = 1)) #: indicator for anticoagulant agents (0 - no  anticoagulant agents, 1 - yes anticoagulant agents)
+#' groupscases<-round(runif(n, min = 0, max = 1)) #: indicator of cases control group (0 - without transient ischemic attack, 1 - with transient ischemic attack)
+#' antihypertensive_agents<-round(runif(n, min = 0, max = 1)) #: indicator for antihypertensive agents (0 - no  antihypertensive agents, 1 - yes antihypertensive agents)
+#' APL<-round(runif(n, min = 0, max = 1)) #: indicator for antiplatelet therapy (0 - no antiplatelet therapy, 1 - yes antiplatelet therapy)
+#' heart_failure<-round(runif(n, min = 0, max = 1)) #: indicator for heart failure (0 - absence of heart failure or 1 - presence of heart failure)
+#' data<-data.frame(birth_cohort,sex,IMD_Quintile,BMI_category,asthma,COPD,CKD,myocardial_infarction,PVD_PAD,SMOKING,alcohol_cat,atrial_fibrillation,Diabetes_factor,anticoagulant_agents,groupscases,antihypertensive_agents,APL,heart_failure)
+#' indexes_of_variables <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18)
+#' age_of_diagnosis=65
+#' time_past_from_diagnosis=1
+#' mylongevity_double_cox_method4(data, indexes_of_variables, age_of_diagnosis, time_past_from_diagnosis)
 mylongevity_double_cox_method4<-function(data,indexes_of_variables, age_of_diagnosis,time_past_from_diagnosis){
   if (missing(data))
     stop("Must specify a dataset via the 'data' argument.")

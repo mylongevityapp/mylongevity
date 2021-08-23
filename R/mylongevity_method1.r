@@ -22,9 +22,9 @@
 #'    -	statins is a categorical variable with numeric value for statin prescription status (0 - no statin intake, 1 - on statin/prescribed statin)
 #' @keywords life_expectancy
 #' @export
+#' @return data frame with life expectancies for given data frame of clients
 #' @examples
 #' set.seed(1234)
-#' library(mylongevity)
 #' n<-1000
 #' age <-round(runif(n, min = 60, max = 85))
 #' gender <- c(rep('M',times=n/2),rep('F',times=n/2))
@@ -36,11 +36,9 @@
 #' bmiCategory <- round(runif(n, min = 1, max = 3))
 #' qRiskCategory <- round(runif(n, min = 0, max = 2))
 #' statins <- round(runif(n, min = 0, max = 1))
-#' data_of_clients <- data.frame(age,gender,townsend,smokerCategory,htn,diabetesCategory,hcl,bmiCategory,qRiskCategory,statins)
+#' data_of_clients <-data.frame(age,gender,townsend,smokerCategory,htn,diabetesCategory,hcl,bmiCategory,qRiskCategory,statins)
 #' indexes_for_columns <- c(1,2,3,4,5,6,7,8,9,10)
 #' mylongevity_method1(data=data_of_clients,indexes_of_variables=indexes_for_columns)
-#' @return data frame with life expectancies for given data frame of clients
-#'
 mylongevity_method1<-function(data,indexes_of_variables){
   if (missing(data))
     stop("Must specify a dataset via the 'data' argument.")

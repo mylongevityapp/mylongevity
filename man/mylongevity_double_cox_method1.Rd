@@ -22,7 +22,6 @@ mylongevity_double_cox_method1(
 }
 \value{
 data frame with life expectancies for given data frame of clients
-res1<-mylongevity_double_cox_method1(data,indexes_of_variables, age_of_diagnosis,time_past_from_diagnosis)
 }
 \description{
 This function loads a file as a data frame of clients.
@@ -45,5 +44,26 @@ The definition of columns are:
    -	sex: indicator for gender (0 - Female, 1 - Male)
    -	smokes: indicator of smoking status (0 non smoker, 1 - former smoker, 2 - current smoker)
    -	townsend - deprivation index (0 - (Townsend 3),  1 - (Townsend 1)  2 - (Townsend 2) , 3 - (Townsend 4), 4 - (Townsend 5))
+}
+\examples{
+set.seed(1234)
+n<-1000
+atrial<-round(runif(n, min = 0, max = 1)) #indicator for atrial fibrillation  (0 - absence of atrial fibrillation or 1 - presence of atrial fibrillation)
+birth_year<-round(runif(n, min = 0, max = 2))  #indicator for year of birth   (0 - born in 1930-1939, 1 - born in 1950-1960, 2 - born in  1940-1949)
+bmi_regrp <-round(runif(n, min = 0, max = 2)) #indicator for body mass index (0 - Healthy, 1 - Overweight, 2 - Obese)
+diabetes<-round(runif(n, min = 0, max = 1))  #indicator of cases control group (0 - absence type 2 diabetes mellitus, 1 - presence type 2 diabetes mellitus)
+hf<-round(runif(n, min = 0, max = 1))  #indicator for heart failure (0 - absence of heart failure, 1 - presence of heart failure)
+hyperchol<-round(runif(n, min = 0, max = 2)) #indicator for hypercholesterolemia (0 - absence of hypercholesterolemia, 1 - presence of hypercholesterolemia)
+hypert<-round(runif(n, min = 0, max = 2)) #indicator for hypertension (0 - absence of Hypertension, 1 - Treated Hypertension 2 - Untreated Hypertension)
+miocarInfarct<-round(runif(n, min = 0, max = 1)) #indicator for myocardial infarction (0 - absence of myocardial infarction, 1 - presence of myocardial infarction)
+pvd<-round(runif(n, min = 0, max = 1)) #indicator for peripheral vascular disease (0 - absence of peripheral vascular disease, 1 - presence of peripheral vascular disease)
+sex<-round(runif(n, min = 0, max = 1)) #indicator for gender (0 - Female, 1 - Male)
+smokes<-round(runif(n, min = 0, max = 2)) #indicator of smoking status (0 non smoker, 1 - former smoker, 2 - current smoker)
+townsend<-round(runif(n, min = 0, max = 4)) #- deprivation index (0 - (Townsend 3),  1 - (Townsend 1)  2 - (Townsend 2) , 3 - (Townsend 4), 4 - (Townsend 5))
+data<-data.frame(atrial,birth_year,bmi_regrp,diabetes,hf,hyperchol,hypert,miocarInfarct,pvd,sex,smokes,townsend)
+indexes_of_variables <- c(1,2,3,4,5,6,7,8,9,10,11,12)
+age_of_diagnosis=60
+time_past_from_diagnosis=1
+mylongevity_double_cox_method1(data, indexes_of_variables, age_of_diagnosis, time_past_from_diagnosis)
 }
 \keyword{life_expectancy}

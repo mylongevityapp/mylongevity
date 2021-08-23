@@ -43,4 +43,21 @@ The definition of columns are:
    -	smokes: indicator of smoking status (0 non smoker, 1 - former smoker, 2 - current smoker)
    -	deprivation - deprivation index (0 - Low (Townsend 1 and Townsend 2), 1 - High (Townsend 4 and Townsend 5), 2 - Medium (Townsend 3))
 }
+\examples{
+set.seed(1234)
+n<-1000
+B_cohort<-round(runif(n, min = 0, max = 3)) # indicator for year of birth  (0 - born in 1921-1930 , 1 - born in 1931-1940,  2 - born in  1941-1950, 3 - born in 1951-1960)
+BMIsmoke<-round(runif(n, min = 0, max = 5)) # indicator for interaction for body mass index and smoking (0 - Healthy or Overweight and Non Smoker, 1 - healthy weight and current smoker, 2 - healthy weight and ex smoker, 3, Obese and current smoker, 4 - Obese and ex-smoker, 5 - Obese and non-smoker)
+CHD<-round(runif(n, min = 0, max = 1)) # indicator for heart failure (0 - absence of coronary heart disease , 1 - presence of coronary heart disease)
+hrtcat<-round(runif(n, min = 0, max = 2)) # indicator for type of hormone replacement therapy (0 - non users of hormone replacement therapy, 1  - Combined Oestrogen and Progesteron , 2 - Oestrogen-only)
+DMIIsmoke<-round(runif(n, min = 0, max = 5)) # interaction of diabetes and smoking variables (0 -  non diabetic and non smoker,1 - non diabetic  and current smoker ,2 - non diabetic and ex-smoker,3 - diabetic and current smoker,4 - diabetic  and ex smoker ,5 - diabetic and non-smoker)
+opho<-round(runif(n, min = 1, max = 2)) # indicator of cases control group (0 - both uteras and ovarian not removed,  1 - both uteras and ovarian removed, 2 - ovaries removed but not uteras)
+hypertension<-round(runif(n, min = 0, max = 1)) # indicator for hypertension (0 - absence of Hypertension, 1 - Treated Hypertension 2 - Untreated Hypertension)
+deprivation <-round(runif(n, min = 0, max = 2))# deprivation index (0 - Low (Townsend 1 and Townsend 2), 1 - High (Townsend 4 and Townsend 5), 2 - Medium (Townsend 3))
+data<-data.frame(B_cohort,BMIsmoke,CHD,deprivation,DMIIsmoke,hrtcat,hypertension,opho)
+indexes_of_variables <- c(1,2,3,4,5,6,7,8)
+age_of_diagnosis=45
+time_past_from_diagnosis=1
+mylongevity_double_cox_method2(data, indexes_of_variables, age_of_diagnosis, time_past_from_diagnosis)
+}
 \keyword{life_expectancy}
